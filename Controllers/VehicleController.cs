@@ -44,7 +44,7 @@ namespace MiniMUZ.Api.Controllers
             {
                 if (vehicle is null)
                 {
-                    return BadRequest("Author is null.");
+                    return BadRequest("Vehicle is null.");
                 }
 
                 if (!ModelState.IsValid)
@@ -74,7 +74,7 @@ namespace MiniMUZ.Api.Controllers
             var vehicle = _dVehicle.GetDto(id);
             if (vehicle == null)
             {
-                return NotFound("Author not found.");
+                return NotFound("Vehicle not found.");
             }
 
             return Ok(vehicle);
@@ -87,13 +87,13 @@ namespace MiniMUZ.Api.Controllers
         {
             if (vehicle == null)
             {
-                return BadRequest("Author is null.");
+                return BadRequest("Vehicle is null.");
             }
 
             var vehicletoid = _dVehicle.GetDto(id);
             if (vehicletoid == null)
             {
-                return NotFound("The Employee record couldn't be found.");
+                return NotFound("The Vehicle record couldn't be found.");
             }
 
             if (!ModelState.IsValid)

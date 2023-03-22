@@ -17,6 +17,8 @@ public partial class MiniMuzContext : DbContext
 
     public virtual DbSet<Dispatch> Dispatches { get; set; }
 
+    public virtual DbSet<Item> Items { get; set; }
+
     public virtual DbSet<Shipment> Shipments { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
@@ -44,6 +46,11 @@ public partial class MiniMuzContext : DbContext
             entity.Property(e => e.DispatchDetails)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.ItemId).HasColumnName("ItemID");
+
+            entity.HasOne(d => d.Item).WithMany(p => p.Dispatches)
+                .HasForeignKey(d => d.ItemId)
+                .HasConstraintName("FK_Dispatch_Item");
 
             entity.HasOne(d => d.Shipment).WithMany(p => p.Dispatches)
                 .HasForeignKey(d => d.ShipmentId)
@@ -52,6 +59,26 @@ public partial class MiniMuzContext : DbContext
             entity.HasOne(d => d.Vehicle).WithMany(p => p.Dispatches)
                 .HasForeignKey(d => d.VehicleId)
                 .HasConstraintName("FK__Dispatch__Vehicl__60A75C0F");
+        });
+
+        modelBuilder.Entity<Item>(entity =>
+        {
+            entity.HasKey(e => e.ItemId).HasName("PK__Item__727E838BF62AB325");
+
+            entity.ToTable("Item");
+
+            entity.Property(e => e.AddedDate).HasColumnType("date");
+            entity.Property(e => e.ItemName)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.ItemType)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.ShipmentId).HasColumnName("ShipmentID");
+
+            entity.HasOne(d => d.Shipment).WithMany(p => p.Items)
+                .HasForeignKey(d => d.ShipmentId)
+                .HasConstraintName("FK_ShipmentID");
         });
 
         modelBuilder.Entity<Shipment>(entity =>

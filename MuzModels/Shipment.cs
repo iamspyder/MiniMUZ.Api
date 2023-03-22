@@ -15,5 +15,7 @@ public partial class Shipment
 
     public virtual ICollection<Dispatch> Dispatches { get; } = new List<Dispatch>();
 
+    public virtual ICollection<Item> Items { get; } = new List<Item>();
+
     public virtual UserWarehouse? Uw { get; set; }
 }

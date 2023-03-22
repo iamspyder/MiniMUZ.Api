@@ -15,6 +15,10 @@ public partial class Dispatch
 
     public DateTime? DispatchDate { get; set; }
 
+    public int? ItemId { get; set; }
+
+    public virtual Item? Item { get; set; }
+
     public virtual Shipment? Shipment { get; set; }
 
     public virtual Vehicle? Vehicle { get; set; }
