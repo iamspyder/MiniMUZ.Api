@@ -75,7 +75,7 @@ namespace MiniMUZ.Api.MuzModels.Data_Manager
 
         public IEnumerable<Shipment> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbcontext.Shipments.ToList();
         }
 
         public Shipment GetById(int id)

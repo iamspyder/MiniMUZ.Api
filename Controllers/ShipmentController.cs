@@ -20,7 +20,24 @@ namespace MiniMUZ.Api.Controllers
             _dShipment = muz;
         }
 
-      
+
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            try
+            {
+                var shipm = _dShipment.GetAll();
+                return Ok(shipm);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
 
         [HttpPost]
         public IActionResult Post(ShipmentDTO shipmentDTO)
