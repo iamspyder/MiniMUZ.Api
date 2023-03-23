@@ -25,6 +25,11 @@ namespace MiniMUZ.Api.Repository
           
         }
 
+        public void Adds(VehiceDTO entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(MuzModels.Vehicle vehicle)
         {
 
@@ -80,6 +85,11 @@ namespace MiniMUZ.Api.Repository
             _dbcontext.Entry(vehicle).State = EntityState.Modified;
             _dbcontext.SaveChanges();
 
+        }
+
+        public void Update(Vehicle entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

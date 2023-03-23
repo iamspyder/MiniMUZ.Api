@@ -3,7 +3,7 @@
     public class ShipmentDTO
     {
        
-            public int? DtoShipmentNo { get; set; }
+            public int DtoShipmentNo { get; set; }
             public string? DtoShipmentName { get; set; }
 
             public int? DtoWuId { get; set; }
@@ -16,7 +16,7 @@
 
     public class ItemDto
     {
-        public int? DtoItemID { get; set; }
+        public int DtoItemID { get; set; }
         public string? DtoItemName { get; set; }
 
         public string? DtoItemType { get; set; }

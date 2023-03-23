@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore;
 using MiniMUZ.Api.MuzModels.DTO.Shipment;
 using MiniMUZ.Api.MuzModels.DTO.Vehicle;
 using MiniMUZ.Api.MuzModels.Repository;
+using System.Diagnostics;
 
 namespace MiniMUZ.Api.MuzModels.Data_Manager
 {
@@ -16,58 +18,44 @@ namespace MiniMUZ.Api.MuzModels.Data_Manager
             _dbcontext = context;
         }
 
-        public void Adds(ShipmentDTO shipmentDTO)
-        {
-            try
-            {
-               
-                var shipment = new Shipment
-                {
-                    ShipmentId = shipmentDTO.DtoShipmentNo,
-                    ShipmentName = shipmentDTO.DtoShipmentName,
-                    ShipmentDate = shipmentDTO.DtoDatetime,
-                    Uwid = shipmentDTO.DtoWuId
-                };
+       
 
-
-                _dbcontext.Shipments.Add(shipment);
-
-                _dbcontext.SaveChanges();
-
-               
-                foreach (var itemDto in shipmentDTO.Items)
-                {
-                    var item = new Item
-                    {
-                        ItemId = itemDto.DtoItemID,
-                        ItemName = itemDto.DtoItemName,
-                        ItemType = itemDto.DtoItemType,
-                        AddedDate = itemDto.DtoDate,
-                        Quantity = itemDto.DtoQuantity,
-                        Space = itemDto.DtoSpace,
-                        ShipmentId = shipment.ShipmentId // set the foreign key to the new shipment's ID
-                    };
-
-                    _dbcontext.Items.Add(item);
-                }
-
-              
-                _dbcontext.SaveChanges();
-
-               
-                return shipmentDTO;
-            }
-            catch (Exception ex)
-            {
-                // handle any exceptions
-                return BadRequest(ex.Message);
-            }
-          //  throw new NotImplementedException();
-        }
+        
+      
 
         public void Add(Shipment entity)
         {
             throw new NotImplementedException();
+        }
+
+        public void Adds(ShipmentDTO entity)
+        {
+            var model = new Shipment
+            {
+                ShipmentId = entity.DtoShipmentNo,
+                ShipmentName = entity.DtoShipmentName,
+                ShipmentDate = entity.DtoDatetime,
+                Uwid = entity.DtoWuId,
+
+
+            };
+            foreach (var itemdto in entity.Items)
+            {
+                model.Items.Add(new Item
+                {
+                    ItemId = itemdto.DtoItemID,
+                    ItemName = itemdto.DtoItemName,
+                    ItemType = itemdto.DtoItemType,
+                    AddedDate = itemdto.DtoDate,
+                    Quantity = itemdto.DtoQuantity,
+                    ShipmentId = itemdto.DtoShipmentID,
+                    Space = itemdto.DtoSapce
+
+                });
+            }
+
+            _dbcontext.Shipments.Add(model);
+            _dbcontext.SaveChanges();
         }
 
         public void Delete(Shipment entity)
@@ -101,6 +89,11 @@ namespace MiniMUZ.Api.MuzModels.Data_Manager
         }
 
         public void Update(Shipment entity, Vehicle vehicle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Shipment entity)
         {
             throw new NotImplementedException();
         }

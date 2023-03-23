@@ -8,7 +8,9 @@
         T Get(long id);
         TDTO GetDto(long id);
         void Add(T entity);
-        void Update(T entity, Vehicle vehicle);
+
+        void Adds(TDTO entity);
+        void Update(T entity);
         void Delete(T entity);
         void DeleteById(int id);
     }

@@ -101,7 +101,7 @@ namespace MiniMUZ.Api.Controllers
                 return BadRequest();
             }
 
-           _dVehicle.Update(vehicle,vehicle);
+           _dVehicle.Update(vehicle);
             return NoContent();
         }
     }
