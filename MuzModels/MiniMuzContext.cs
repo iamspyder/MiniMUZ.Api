@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace MiniMUZ.Api.MuzModels;
 
-public partial class MiniMuzContext : DbContext
+public partial class MiniMuzContext : DbContext//IdentityDbContext<IdentityUser>
 {
     public MiniMuzContext()
     {
@@ -29,6 +31,7 @@ public partial class MiniMuzContext : DbContext
 
     public virtual DbSet<Warehouse> Warehouses { get; set; }
 
+   
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=DESKTOP-RFV73GF\\SQLEXPRESS;Initial Catalog=MiniMUZ;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
@@ -37,6 +40,8 @@ public partial class MiniMuzContext : DbContext
     {
         modelBuilder.Entity<Dispatch>(entity =>
         {
+
+           
             entity.HasKey(e => e.DispatchId).HasName("PK__Dispatch__434DBD755E83DC6D");
 
             entity.ToTable("Dispatch");
